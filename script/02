@@ -12,7 +12,7 @@ fi
 
 if [ $2 == "del" ]
 then
-        echo "we are going to kick user $1 and delete homedir"
+        echo "we are going to kick user $1 and delete him from system"
 fi
 
 if [ $2 == "kick" ]
@@ -27,18 +27,26 @@ then
         exit $E_OPTERROR
 fi
 
-for i in `seq 1 10`;
-do
+ONLINE_USER=$(who | awk NR\ ==\ 1\{print\ \$1\})
+COUNTER=1
 
-ONLINE_USER=$(who | awk NR\ ==\ $i\{print\ \$1\})
+until [ -z $ONLINE_USER ]; do
+        ONLINE_USER=$(who | awk NR\ ==\ $COUNTER\{print\ \$1\})
 
 
-if [ $ONLINE_USER = $1 ]
+if [[ "$ONLINE_USER" = "$1" && "$2" = "del" ]]
 then
-        echo "we found $1"
+        echo "we found $1 and will remove it !!!"
+        killall -u $ONLINE_USER
+        userdel -r $ONLINE_USER
 fi
-echo $ONLINE_USER
 
+if [[ "$ONLINE_USER" = "$1" && "$2" = "kick" ]]
+then
+        echo "we found $1 and will kick it !!!"
+        killall -u $ONLINE_USER
+fi
+        let COUNTER+=1
 done
 
 echo
