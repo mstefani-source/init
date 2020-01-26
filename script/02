@@ -1,0 +1,44 @@
+#!/bin/env bash
+
+USAGE='usage: ./02 [username] [kick/dell]'
+E_OPTERROR=65
+
+if [ $# -ne 2 ]
+then
+        echo $USAGE
+        echo
+        exit $E_OPTERROR
+fi
+
+if [ $2 == "del" ]
+then
+        echo "we are going to kick user $1 and delete homedir"
+fi
+
+if [ $2 == "kick" ]
+then
+        echo "we are going to kick user $1 and nothing more"
+fi
+
+if [ $2 != "kick" -a $2 != "del" ]
+then
+        echo $USAGE
+        echo
+        exit $E_OPTERROR
+fi
+
+for i in `seq 1 10`;
+do
+
+ONLINE_USER=$(who | awk NR\ ==\ $i\{print\ \$1\})
+
+
+if [ $ONLINE_USER = $1 ]
+then
+        echo "we found $1"
+fi
+echo $ONLINE_USER
+
+done
+
+echo
