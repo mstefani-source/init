@@ -1,0 +1,2 @@
+#ifconfig -v shows more info and now we can get which network card is Wi-Fi
+ifconfig en1 | grep ether | awk '{print $2}'

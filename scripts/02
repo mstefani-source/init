@@ -1,7 +1,17 @@
-#!/bin/env bash
+#! /bin/bash
+# killuser, version 1
+# You need to root privilegies to run this script
 
+ROOT_UID=0
+E_NOTROOT=67
 USAGE='usage: ./02 [username] [kick/dell]'
 E_OPTERROR=65
+
+if [ "$UID" -ne "$ROOT_UID" ]
+then
+	echo "You have to get an Administrative rights."
+	exit $E_NOTROOT
+fi
 
 if [ $# -ne 2 ]
 then

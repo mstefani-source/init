@@ -1,0 +1,17 @@
+#Explain how connect yourself as new user. (With graphic session and ssh session)
+#
+####### graphic session ######
+# 
+# adduser newuser
+# logout
+# login newuser
+#
+#
+########### ssh session ######
+# 
+# ssh existinSSHuser@myhost 
+# sudo adduser newuser
+# add newuser to group able to connect via ssh
+# logout
+# logout
+# ssh newuser@myhost 

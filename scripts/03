@@ -1,0 +1,6 @@
+#/bin/bash
+#	this script makes archiving more simple
+#	just type 03 [what you want to archive]
+#	and you will get an archive in current directory
+
+tar -cjf $1.bzip2 $1
